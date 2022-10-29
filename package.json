@@ -1,0 +1,31 @@
+{
+  "name": "hub.z",
+  "version": "0.0.1",
+  "description": "terminal based connection to hue lights",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zacharyarnold2016/hub.z.git"
+  },
+  "type": "module",
+  "keywords": [
+    "hue",
+    "phillips",
+    "terminal",
+    "CLI"
+  ],
+  "author": "Zachary Arnold",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zacharyarnold2016/hub.z/issues"
+  },
+  "homepage": "https://github.com/zacharyarnold2016/hub.z#readme",
+  "dependencies": {
+    "chalk": "^5.1.2",
+    "chalk-animation": "^2.0.3",
+    "inquirer": "^9.1.4"
+  }
+}
