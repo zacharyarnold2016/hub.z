@@ -1,4 +1,5 @@
 import inquirer from "inquirer"
+import connect from "./util.js"
 
 const hueInterface = () => {
     console.clear()
@@ -22,7 +23,7 @@ const hueInterface = () => {
                     console.log("Off");
                     break;
                 case "Init":
-                    console.log("Init");
+                    connect()
                     break;
             }
         }))

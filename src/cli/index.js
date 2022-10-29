@@ -1,12 +1,14 @@
 import chalk from "chalk";
 import chalkAnimation from "chalk-animation";
 import inquirer from "inquirer";
+import hueInterface from "../hue/index.js";
 
 const welcome = chalkAnimation.rainbow(
   "Welcome to The Hub. Please select an option:"
 );
 
 export default async () => {
+  console.clear()
   welcome.start();
   await delay(1000);
   welcome.stop();
@@ -20,10 +22,9 @@ export default async () => {
       },
     ])
     .then(({ selection }) => {
-      console.log(selection);
       switch (selection) {
         case "Hue":
-          console.log("HUE");
+          hueInterface();
           break;
         case "Music":
           console.log("Music");
