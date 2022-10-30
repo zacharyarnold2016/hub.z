@@ -1,24 +1,31 @@
 import inquirer from "inquirer";
-import fetch from 'node-fetch';
+import dotenv from "dotenv";
+import { writeFile } from "fs";
+import { hostname } from "os";
 
 const connect = async () => {
-    let response = await fetch("https://discovery.meethue.com")
-    const data = await response.json()
-    const { internalipaddress } = data[0]
-    console.log(internalipaddress);
-    inquirer.prompt([{
-        name: "device",
-        message: "Please input a desired device name"
-    }]).then(({ device }) => {
-        console.log(device);
-        inquirer.prompt([{
-            message: "Press Hue Link button. Then Press Enter"
-        }]).then(async () => {
-            response = await fetch(`https://${internalipaddress}/debug/clip.html`)
-            const data = await response.json();
-            const {username} = data.success;
-        })
-    })
-}
+  dotenv.config();
+  if (!process.env.HUEUSER) {
+    const { appName } = await inquirer.prompt({
+      name: "appName",
+      message:
+        "Please input your app name, press the hue link button, and then enter",
+    });
+
+    const deviceName = hostname();
+
+    const { username, clientkey } = await discoverAndCreateUser(
+      appName,
+      deviceName
+    );
+
+    const loggedUser = `HUEUSER=${username}`;
+    writeFile(".env", loggedUser, () => {
+      console.log(loggedUser);
+    });
+  } else {
+    console.log("You already have a username assigned to this app.");
+  }
+};
 
 export default connect;
