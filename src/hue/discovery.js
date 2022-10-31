@@ -5,7 +5,7 @@
  */
 
 import { v3 } from "node-hue-api";
-const { discovery, hueApi } = v3;
+const { discovery, api } = v3;
 
 async function discoverBridge() {
   const discoveryResults = await discovery.nupnpSearch();
@@ -23,7 +23,7 @@ async function discoverAndCreateUser(appName, deviceName) {
   const ipAddress = await discoverBridge();
 
   // Create an unauthenticated instance of the Hue API so that we can create a new user
-  const unauthenticatedApi = await hueApi.createLocal(ipAddress).connect();
+  const unauthenticatedApi = await api.createLocal(ipAddress).connect();
 
   let createdUser;
   try {
@@ -46,7 +46,7 @@ async function discoverAndCreateUser(appName, deviceName) {
     );
 
     // Create a new API instance that is authenticated with the new user we created
-    const authenticatedApi = await hueApi
+    const authenticatedApi = await api
       .createLocal(ipAddress)
       .connect(createdUser.username);
 

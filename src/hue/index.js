@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import connect from "./util.js";
+import { connect, changeLights } from "./util.js";
 import { writeFile } from "fs";
 
 const hueInterface = async () => {
@@ -17,7 +17,7 @@ const hueInterface = async () => {
       console.log("Change");
       break;
     case "On":
-      console.log("On");
+      changeLights(1);
       break;
     case "Off":
       console.log("Off");

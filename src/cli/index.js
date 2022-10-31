@@ -2,13 +2,22 @@ import chalk from "chalk";
 import chalkAnimation from "chalk-animation";
 import inquirer from "inquirer";
 import hueInterface from "../hue/index.js";
+import dotenv from "dotenv";
 
-const welcome = chalkAnimation.rainbow(
-  "Welcome to The Hub. Please select an option:"
-);
+dotenv.config();
+const user = process.env.CLIUSER;
+let welcome;
+
+if (!user) {
+  welcome = chalkAnimation.rainbow(
+    "Welcome to The Hub. Please select an option:"
+  );
+} else {
+  welcome = chalkAnimation.rainbow(`Hello ${user}, please select an option:`);
+}
 
 export default async () => {
-  console.clear()
+  console.clear();
   welcome.start();
   await delay(1000);
   welcome.stop();
