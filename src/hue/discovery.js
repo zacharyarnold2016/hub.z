@@ -2,6 +2,8 @@
  * Premade Code from https://github.com/peter-murray using the node-hue-api
  * this module is here to go through the discovery and linking process for
  * the hue bridge
+ * 
+ * Will replace with my own module when it's actually complete
  */
 
 import { v3 } from "node-hue-api";
