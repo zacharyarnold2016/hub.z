@@ -7,11 +7,11 @@ import discoverAndCreateUser from "./discovery.js";
 
 const { discovery, api, lightStates } = v3;
 const { LightState } = lightStates;
-// const username = process.env.HUEUSER;
 const username = process.env.HUEUSER;
 
 const connect = async () => {
   dotenv.config();
+
   if (!process.env.HUEUSER) {
     const { appName } = await inquirer.prompt({
       name: "appName",
@@ -36,22 +36,13 @@ const connect = async () => {
 };
 
 const changeLights = async (light = 1) => {
-  discovery
-    .nupnpSearch()
-    .then(async (searchResults) => {
-      const { ipaddress } = searchResults[0];
-      console.log(await api.createLocal(ipaddress).connect(username));
-      return api.createLocal(ipaddress).connect(username);
-    })
-    .then(async (api) => {
-      const state = new LightState().on().ct(200).brightness(100);
-      console.log(state);
+  dotenv.config();
 
-      await api.lights.setLightState(1, state);
-    })
-    .then((result) => {
-      console.log(`Light state change was successful? ${result}`);
-    });
+  const USERNAME = "J7-xoLQkRvxa1oTiz7gpxue0SzyxJIRUhtzLFZwZ",
+    // The name of the light we wish to retrieve by name
+    LIGHT_ID = 1;
 };
+
+const getIp = async () => {};
 
 export { connect, changeLights };
